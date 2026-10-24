@@ -1,0 +1,28 @@
+{
+  "name": "part7-bloglist-client",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "axios": "^1.11.0",
+    "react-router-dom": "^7.9.0",
+    "styled-components": "^6.1.19",
+    "zustand": "^5.0.15"
+  },
+  "devDependencies": {
+    "eslint": "^9.34.0",
+    "@eslint/js": "^9.34.0",
+    "globals": "^16.3.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.20",
+    "vite": "^6.3.5",
+    "@vitejs/plugin-react": "^4.7.0"
+  }
+}

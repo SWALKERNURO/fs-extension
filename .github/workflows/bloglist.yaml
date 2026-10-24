@@ -1,57 +1,55 @@
 name: bloglist tests
-
 on:
   push:
-    branches:
-      - xmain
-
+    branches: [main]
+permissions:
+  contents: read
 jobs:
   test:
-    runs-on: ubuntu-latest
-
+    runs-on: ubuntu-22.04
     services:
       mongodb:
-        image: mongo:7
-        ports:
-          - 27017:27017
-
+        image: mongo:8
+        ports: ['27017:27017']
+        options: >-
+          --health-cmd "mongosh --quiet --eval 'db.adminCommand({ ping: 1 })'"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 12
     env:
       NODE_ENV: test
       PORT: 3001
-      SECRET: ci-test-secret
-      TEST_MONGODB_URI: mongodb://localhost:27017/bloglist-test
-
+      SECRET: ci-test-only-secret-32-characters-minimum
+      TEST_MONGODB_URI: mongodb://127.0.0.1:27017/bloglist_test
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-node@v4
         with:
           node-version: 24
-
-      - name: Install server dependencies
-        working-directory: bloglist/server
-        run: npm ci
-
-      - name: Install client dependencies
-        working-directory: bloglist/client
-        run: npm ci
-
-      - name: Install test dependencies
+      - run: npm install --no-audit --no-fund
+        working-directory: bloglist
+      - run: npm run format
+        working-directory: bloglist
+      - name: Export formatted public source
+        run: node scripts/export-formatted.mjs
+        working-directory: bloglist
+      - run: npm run build
+        working-directory: bloglist
+      - run: npm run lint --workspace=client
+        working-directory: bloglist
+      - run: npm run lint --workspace=server
+        working-directory: bloglist
+      - run: npm test --workspace=server
+        working-directory: bloglist
+      - run: npm install --no-audit --no-fund
         working-directory: bloglist-tests
-        run: npm ci
-
-      - name: Install Playwright browsers
+      - run: npx playwright install --with-deps chromium
         working-directory: bloglist-tests
-        run: npx playwright install --with-deps chromium
-
-      - name: Run Playwright tests
+      - run: npm test
         working-directory: bloglist-tests
-        run: npx playwright test
-
-      - name: Upload Playwright report
-        if: always()
-        uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v4
+        if: failure()
         with:
-          name: playwright-report
+          name: bloglist-report
           path: bloglist-tests/playwright-report/
-          retention-days: 14
+          retention-days: 7

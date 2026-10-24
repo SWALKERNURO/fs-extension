@@ -3,7 +3,7 @@ name: routed anecdotes tests
 on:
   push:
     branches:
-      - xmain
+      - main
 
 jobs:
   test:
@@ -17,11 +17,11 @@ jobs:
 
       - name: Install app dependencies
         working-directory: routed-anecdotes
-        run: npm ci
+        run: npm install --no-audit --no-fund
 
       - name: Install test dependencies
         working-directory: routed-anecdotes-tests
-        run: npm ci
+        run: npm install --no-audit --no-fund
 
       - name: Install Playwright browsers
         working-directory: routed-anecdotes-tests

@@ -1,0 +1,27 @@
+{
+  "name": "part7-bloglist-server",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js",
+    "build": "node --check app.js",
+    "test": "node --test --test-concurrency=1 tests/*.test.js",
+    "lint": "eslint .",
+    "start:test": "node test-start.js"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "mongoose": "^8.18.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.1",
+    "bcrypt": "^6.0.0",
+    "jsonwebtoken": "^9.0.2"
+  },
+  "devDependencies": {
+    "supertest": "^7.1.4",
+    "eslint": "^9.34.0",
+    "@eslint/js": "^9.34.0",
+    "globals": "^16.3.0"
+  }
+}
