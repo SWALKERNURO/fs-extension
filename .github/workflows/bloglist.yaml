@@ -28,10 +28,7 @@ jobs:
           node-version: 24
       - run: npm install --no-audit --no-fund
         working-directory: bloglist
-      - run: npm run format
-        working-directory: bloglist
-      - name: Export formatted public source
-        run: node scripts/export-formatted.mjs
+      - run: npm run format:check
         working-directory: bloglist
       - run: npm run build
         working-directory: bloglist

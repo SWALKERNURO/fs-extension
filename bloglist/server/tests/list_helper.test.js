@@ -23,15 +23,19 @@ describe('favorite blog', () => {
     assert.deepEqual(favoriteBlog(blogs), blogs[1])
     assert.deepEqual(blogs, original)
   })
-  test('ties return one valid favorite', () => assert.equal(favoriteBlog([{ likes: 5 }, { likes: 5 }]).likes, 5))
+  test('ties return one valid favorite', () =>
+    assert.equal(favoriteBlog([{ likes: 5 }, { likes: 5 }]).likes, 5))
 })
 describe('most blogs', () => {
   test('empty list', () => assert.equal(mostBlogs([]), null))
-  test('counts entries by author', () => assert.deepEqual(mostBlogs(blogs), { author: 'Maya', blogs: 2 }))
+  test('counts entries by author', () =>
+    assert.deepEqual(mostBlogs(blogs), { author: 'Maya', blogs: 2 }))
   test('single author', () => assert.deepEqual(mostBlogs([blogs[1]]), { author: 'Leon', blogs: 1 }))
 })
 describe('most likes', () => {
   test('empty list', () => assert.equal(mostLikes([]), null))
-  test('aggregates rather than selecting a single blog', () => assert.deepEqual(mostLikes(blogs), { author: 'Maya', likes: 9 }))
-  test('all zero likes still has a winner', () => assert.deepEqual(mostLikes([{ author: 'Zero', likes: 0 }]), { author: 'Zero', likes: 0 }))
+  test('aggregates rather than selecting a single blog', () =>
+    assert.deepEqual(mostLikes(blogs), { author: 'Maya', likes: 9 }))
+  test('all zero likes still has a winner', () =>
+    assert.deepEqual(mostLikes([{ author: 'Zero', likes: 0 }]), { author: 'Zero', likes: 0 }))
 })

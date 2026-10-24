@@ -6,10 +6,13 @@ const schema = new mongoose.Schema({
   passwordHash: { type: String, required: true },
 })
 schema.virtual('blogs', { ref: 'Blog', localField: '_id', foreignField: 'user' })
-schema.set('toJSON', { virtuals: true, transform: (_document, object) => {
-  object.id = object._id.toString()
-  delete object._id
-  delete object.__v
-  delete object.passwordHash
-} })
+schema.set('toJSON', {
+  virtuals: true,
+  transform: (_document, object) => {
+    object.id = object._id.toString()
+    delete object._id
+    delete object.__v
+    delete object.passwordHash
+  },
+})
 export default mongoose.model('BlogUser', schema)

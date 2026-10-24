@@ -20,7 +20,12 @@ if (process.env.NODE_ENV === 'test') app.use('/api/testing', testing)
 const clientDist = fileURLToPath(new URL('../client/dist/', import.meta.url))
 app.use(express.static(clientDist))
 app.get('/{*path}', (request, response, next) => {
-  if ((request.path === '/api' || request.path.startsWith('/api/')) || !existsSync(clientDist + 'index.html')) return next()
+  if (
+    request.path === '/api' ||
+    request.path.startsWith('/api/') ||
+    !existsSync(clientDist + 'index.html')
+  )
+    return next()
   response.sendFile(clientDist + 'index.html')
 })
 app.use(unknownEndpoint)

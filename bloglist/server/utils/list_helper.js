@@ -1,6 +1,10 @@
-export const dummy = _blogs => 1
-export const totalLikes = blogs => blogs.reduce((total, blog) => total + blog.likes, 0)
-export const favoriteBlog = blogs => blogs.reduce((favorite, blog) => !favorite || blog.likes > favorite.likes ? blog : favorite, null)
+export const dummy = (_blogs) => 1
+export const totalLikes = (blogs) => blogs.reduce((total, blog) => total + blog.likes, 0)
+export const favoriteBlog = (blogs) =>
+  blogs.reduce(
+    (favorite, blog) => (!favorite || blog.likes > favorite.likes ? blog : favorite),
+    null,
+  )
 
 const aggregateAuthors = (blogs, value, property) => {
   const totals = new Map()
@@ -11,5 +15,5 @@ const aggregateAuthors = (blogs, value, property) => {
   }
   return winner
 }
-export const mostBlogs = blogs => aggregateAuthors(blogs, () => 1, 'blogs')
-export const mostLikes = blogs => aggregateAuthors(blogs, blog => blog.likes, 'likes')
+export const mostBlogs = (blogs) => aggregateAuthors(blogs, () => 1, 'blogs')
+export const mostLikes = (blogs) => aggregateAuthors(blogs, (blog) => blog.likes, 'likes')

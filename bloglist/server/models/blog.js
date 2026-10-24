@@ -8,9 +8,11 @@ const schema = new mongoose.Schema({
   comments: { type: [{ type: String, trim: true, maxlength: 2000 }], default: [] },
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'BlogUser', required: true },
 })
-schema.set('toJSON', { transform: (_document, object) => {
-  object.id = object._id.toString()
-  delete object._id
-  delete object.__v
-} })
+schema.set('toJSON', {
+  transform: (_document, object) => {
+    object.id = object._id.toString()
+    delete object._id
+    delete object.__v
+  },
+})
 export default mongoose.model('Blog', schema)

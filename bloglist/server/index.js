@@ -5,7 +5,7 @@ import { port, mongoUri, validateConfig } from './utils/config.js'
 try {
   validateConfig()
   await mongoose.connect(mongoUri)
-  await Promise.all(Object.values(mongoose.models).map(model => model.init()))
+  await Promise.all(Object.values(mongoose.models).map((model) => model.init()))
   app.listen(port, () => console.log(`Bloglist listening on port ${port}`))
 } catch (error) {
   console.error('Could not start bloglist:', error.name)
