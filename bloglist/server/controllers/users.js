@@ -15,12 +15,9 @@ router.post('/', async (request, response) => {
     password.length < 3 ||
     Buffer.byteLength(password) > 72
   ) {
-    return response
-      .status(400)
-      .json({
-        error:
-          'username and password must have at least 3 characters; password must not exceed 72 bytes',
-      })
+    const error =
+      'username and password must have at least 3 characters; password must not exceed 72 bytes'
+    return response.status(400).json({ error })
   }
   if (name !== undefined && typeof name !== 'string')
     return response.status(400).json({ error: 'name must be text' })

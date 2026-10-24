@@ -20,7 +20,9 @@ const newBlog = {
   url: 'https://example.com/boundaries',
   likes: 4,
 }
-const authorization = (value) => `*** () => {
+const authorization = (value) => 'Bearer ' + value
+
+before(async () => {
   validateConfig()
   const databaseName = new URL(mongoUri).pathname.slice(1)
   if (!databaseName.endsWith('_test'))
@@ -94,7 +96,7 @@ for (const property of ['title', 'url']) {
     assert.equal(await Blog.countDocuments(), 2)
   })
 }
-for (const header of [null, '***']) {
+for (const header of [null, 'Bearer invalid-token']) {
   test(`${header ? 'invalid' : 'missing'} token rejects creation with 401`, async () => {
     const call = api.post('/api/blogs').send(newBlog)
     if (header) call.set('Authorization', header)
