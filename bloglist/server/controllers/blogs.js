@@ -25,7 +25,7 @@ router.put('/:id', async (request, response) => {
     return response.status(400).json({ error: 'likes must be a nonnegative integer' })
   const blog = await Blog.findByIdAndUpdate(
     request.blogId,
-    { likes },
+    { likes: Number(likes) },
     { new: true, runValidators: true },
   ).populate('user', { username: 1, name: 1 })
   if (!blog) return response.status(404).json({ error: 'blog not found' })
