@@ -10,6 +10,14 @@ test('rejects malformed and query-shaped blog identifiers before database access
   }
 })
 
+test('rejects query-shaped update values before database access', async () => {
+  const result = await request(app)
+    .put('/api/blogs/507f1f77bcf86cd799439011')
+    .send({ likes: { $gt: 0 } })
+    .expect(400)
+  assert.equal(result.body.error, 'likes must be a nonnegative integer')
+})
+
 test('throttles repeated failed login requests without a database', async () => {
   let result
   for (let attempt = 0; attempt < 21; attempt += 1) {
