@@ -16,7 +16,8 @@
     "cors": "^2.8.5",
     "dotenv": "^16.6.1",
     "bcrypt": "^6.0.0",
-    "jsonwebtoken": "^9.0.2"
+    "jsonwebtoken": "^9.0.2",
+    "express-rate-limit": "8.7.4"
   },
   "devDependencies": {
     "supertest": "^7.1.4",

@@ -1,12 +1,17 @@
 name: routed anecdotes tests
 
 on:
+  pull_request:
   push:
     branches:
       - main
 
+permissions:
+  contents: read
+
 jobs:
   test:
+    name: Routed anecdotes tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -38,3 +43,4 @@ jobs:
           name: playwright-report
           path: routed-anecdotes-tests/playwright-report/
           retention-days: 14
+

@@ -1,11 +1,13 @@
 name: bloglist tests
 on:
+  pull_request:
   push:
     branches: [main]
 permissions:
   contents: read
 jobs:
   test:
+    name: Bloglist tests
     runs-on: ubuntu-22.04
     services:
       mongodb:
@@ -50,3 +52,4 @@ jobs:
           name: bloglist-report
           path: bloglist-tests/playwright-report/
           retention-days: 7
+
