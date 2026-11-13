@@ -22,7 +22,11 @@ jobs:
 
       - name: Install app dependencies
         working-directory: routed-anecdotes
-        run: npm install --no-audit --no-fund
+        run: npm ci --no-audit --no-fund
+
+      - name: Audit app dependencies
+        working-directory: routed-anecdotes
+        run: npm audit --audit-level=low
 
       - name: Install test dependencies
         working-directory: routed-anecdotes-tests
